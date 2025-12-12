@@ -1,0 +1,31 @@
+{
+  "name": "@rkmmax/specialists",
+  "version": "1.0.0",
+  "description": "Biblioteca modular com 54 especialistas de IA para o ecossistema RKMMAX",
+  "main": "specialists.js",
+  "type": "module",
+  "keywords": [
+    "ai",
+    "specialists",
+    "agents",
+    "rkmmax",
+    "chatbot",
+    "gemini"
+  ],
+  "author": "Roberto Kiziriam Max <roberto@kizirianmax.site>",
+  "license": "UNLICENSED",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kizirianmax/rkmmax-specialists.git"
+  },
+  "exports": {
+    ".": "./specialists.js",
+    "./specialists": "./specialists.js"
+  },
+  "files": [
+    "specialists.js",
+    "README.md",
+    "LICENSE"
+  ]
+}

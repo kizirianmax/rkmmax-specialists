@@ -1,166 +1,103 @@
-# 🔗 Guia de Integração - RKMMAX Specialists
+# 🔌 Guia de Integração KIZI Specialists
 
-Este guia mostra como integrar a biblioteca de especialistas em diferentes projetos.
+Este guia explica como integrar a biblioteca de especialistas KIZI em seus projetos.
+
+## 🚀 Sistema KIZI
+
+A biblioteca foi projetada para funcionar com os 3 motores KIZI:
+
+| Motor | Tecnologia | Quando Usar |
+|-------|------------|-------------|
+| 🧠 **KIZI 2.5 Pro** | Gemini 2.5 Pro | Raciocínio complexo, análises profundas |
+| 🚀 **KIZI Speed** | Groq Llama 70B | Velocidade máxima, respostas rápidas |
+| ⚡ **KIZI Flash** | Gemini Flash | Respostas simples, conversas leves |
 
 ## 📦 Instalação
 
-### Opção 1: NPM Package (Futuro)
+### Opção 1: Clone direto
 
 ```bash
-npm install @rkmmax/specialists
+git clone https://github.com/kizirianmax/rkmmax-specialists.git
+cp rkmmax-specialists/specialists.js seu-projeto/src/config/
 ```
 
-### Opção 2: Git Submodule
+### Opção 2: Submódulo Git
 
 ```bash
-cd seu-projeto
-git submodule add https://github.com/kizirianmax/rkmmax-specialists.git specialists
+git submodule add https://github.com/kizirianmax/rkmmax-specialists.git lib/specialists
 ```
 
-### Opção 3: Cópia Direta
+### Opção 3: Copiar arquivo
 
-```bash
-# Copiar arquivo para seu projeto
-cp specialists/specialists.js seu-projeto/src/config/
-```
+Simplesmente copie `specialists.js` para seu projeto.
 
 ## 🚀 Uso Básico
 
-### Importar Especialistas
+### Importar especialistas
 
 ```javascript
-import { specialists } from '@rkmmax/specialists';
-
-// ou se copiou direto
-import { specialists } from './config/specialists.js';
+import { 
+  specialists, 
+  categories,
+  getSpecialist,
+  getSpecialistsByCategory,
+  searchSpecialists,
+  getStats 
+} from './specialists.js';
 ```
 
-### Listar Todos os Especialistas
+### Acessar um especialista
 
 ```javascript
-const allSpecialists = Object.values(specialists);
-
-console.log(`Total: ${allSpecialists.length} especialistas`);
-
-allSpecialists.forEach(specialist => {
-  console.log(`${specialist.emoji} ${specialist.name} - ${specialist.description}`);
-});
-```
-
-### Filtrar por Categoria
-
-```javascript
-// Obter todos especialistas de tecnologia
-const techSpecialists = Object.values(specialists)
-  .filter(s => s.category === 'tech');
-
-// Obter apenas visíveis
-const visibleSpecialists = Object.values(specialists)
-  .filter(s => s.visible);
-
-// Combinar filtros
-const visibleTechSpecialists = Object.values(specialists)
-  .filter(s => s.category === 'tech' && s.visible);
-```
-
-### Acessar Especialista Específico
-
-```javascript
-// Por ID
 const code = specialists.code;
-console.log(code.systemPrompt);
+// ou
+const code = getSpecialist('code');
 
-// Verificar se existe
-if (specialists.code) {
-  console.log('Especialista Code disponível!');
-}
+console.log(code.name);        // "Code"
+console.log(code.emoji);       // "💻"
+console.log(code.description); // "Programação e desenvolvimento de software"
+console.log(code.systemPrompt); // Prompt KIZI completo
 ```
 
-## 🎨 Integração com React
-
-### Componente de Card
-
-```jsx
-import { specialists } from '@rkmmax/specialists';
-
-function SpecialistCard({ specialistId }) {
-  const specialist = specialists[specialistId];
-  
-  if (!specialist) return null;
-  
-  return (
-    <div className="specialist-card">
-      <img src={specialist.avatar} alt={specialist.name} />
-      <span className="emoji">{specialist.emoji}</span>
-      <h3>{specialist.name}</h3>
-      <p>{specialist.description}</p>
-      <span className="category">{specialist.category}</span>
-    </div>
-  );
-}
-
-export default SpecialistCard;
-```
-
-### Lista de Especialistas
-
-```jsx
-import { specialists } from '@rkmmax/specialists';
-
-function SpecialistsList({ category }) {
-  const filtered = Object.values(specialists)
-    .filter(s => !category || s.category === category)
-    .filter(s => s.visible);
-  
-  return (
-    <div className="specialists-grid">
-      {filtered.map(specialist => (
-        <SpecialistCard 
-          key={specialist.id} 
-          specialistId={specialist.id} 
-        />
-      ))}
-    </div>
-  );
-}
-```
-
-### Seletor de Categoria
-
-```jsx
-import { specialists } from '@rkmmax/specialists';
-
-function CategoryFilter({ onSelect }) {
-  // Obter categorias únicas
-  const categories = [...new Set(
-    Object.values(specialists).map(s => s.category)
-  )];
-  
-  return (
-    <select onChange={(e) => onSelect(e.target.value)}>
-      <option value="">Todas as categorias</option>
-      {categories.map(cat => (
-        <option key={cat} value={cat}>
-          {cat}
-        </option>
-      ))}
-    </select>
-  );
-}
-```
-
-## 🤖 Integração com APIs de IA
-
-### Gemini API
+### Listar por categoria
 
 ```javascript
-import { specialists } from '@rkmmax/specialists';
+const techSpecialists = getSpecialistsByCategory('tech');
+// Retorna: [code, nexus, synth, sec, data, ux, mobile]
+```
 
-async function callGemini(specialistId, userMessage) {
-  const specialist = specialists[specialistId];
+### Buscar especialistas
+
+```javascript
+const results = searchSpecialists('marketing');
+// Busca em nome, descrição e categoria
+```
+
+### Estatísticas
+
+```javascript
+const stats = getStats();
+console.log(stats.total);      // 49
+console.log(stats.categories); // 9
+console.log(stats.byCategory); // { tech: 7, creative: 8, ... }
+```
+
+## 🤖 Integração com API de IA
+
+### KIZI 2.5 Pro (Gemini 2.5 Pro)
+
+```javascript
+import { getSpecialist } from './specialists.js';
+
+async function chatWithKiziPro(specialistId, userMessage) {
+  const specialist = getSpecialist(specialistId);
   
+  if (!specialist) {
+    throw new Error('Especialista não encontrado');
+  }
+
   const response = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-thinking-exp-1219:generateContent?key=${API_KEY}`,
+    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent?key=${API_KEY}`,
     {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -171,281 +108,307 @@ async function callGemini(specialistId, userMessage) {
         contents: [{
           role: 'user',
           parts: [{ text: userMessage }]
-        }]
+        }],
+        generationConfig: {
+          temperature: 1.0,
+          maxOutputTokens: 16000,
+          topP: 0.95,
+          topK: 64
+        }
       })
     }
   );
-  
+
   const data = await response.json();
   return data.candidates[0].content.parts[0].text;
 }
 ```
 
-### OpenAI API
+### KIZI Speed (Groq Llama 70B)
 
 ```javascript
-import { specialists } from '@rkmmax/specialists';
+import { getSpecialist } from './specialists.js';
 
-async function callOpenAI(specialistId, userMessage) {
-  const specialist = specialists[specialistId];
-  
-  const response = await fetch('https://api.openai.com/v1/chat/completions', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${API_KEY}`
-    },
-    body: JSON.stringify({
-      model: 'gpt-4',
-      messages: [
-        { role: 'system', content: specialist.systemPrompt },
-        { role: 'user', content: userMessage }
-      ]
-    })
-  });
-  
-  const data = await response.json();
-  return data.choices[0].message.content;
-}
-```
+async function chatWithKiziSpeed(specialistId, userMessage) {
+  const specialist = getSpecialist(specialistId);
 
-### GROQ API
-
-```javascript
-import { specialists } from '@rkmmax/specialists';
-
-async function callGroq(specialistId, userMessage) {
-  const specialist = specialists[specialistId];
-  
   const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${API_KEY}`
+      'Authorization': `Bearer ${GROQ_API_KEY}`
     },
     body: JSON.stringify({
       model: 'llama-3.3-70b-versatile',
       messages: [
         { role: 'system', content: specialist.systemPrompt },
         { role: 'user', content: userMessage }
-      ]
+      ],
+      temperature: 0.7,
+      max_tokens: 4000
     })
   });
-  
+
   const data = await response.json();
   return data.choices[0].message.content;
 }
 ```
 
-## 🎯 Casos de Uso Avançados
-
-### Sistema de Roteamento Inteligente
+### KIZI Flash (Gemini Flash)
 
 ```javascript
-import { specialists } from '@rkmmax/specialists';
+import { getSpecialist } from './specialists.js';
 
-function routeToSpecialist(userMessage) {
-  // Palavras-chave por categoria
-  const keywords = {
-    tech: ['código', 'programação', 'bug', 'api', 'deploy'],
-    education: ['estudar', 'prova', 'matéria', 'lição'],
-    business: ['negócio', 'venda', 'marketing', 'estratégia'],
-    // ... mais categorias
-  };
-  
-  // Encontrar categoria mais relevante
-  let bestCategory = null;
-  let maxMatches = 0;
-  
-  for (const [category, words] of Object.entries(keywords)) {
-    const matches = words.filter(word => 
-      userMessage.toLowerCase().includes(word)
-    ).length;
-    
-    if (matches > maxMatches) {
-      maxMatches = matches;
-      bestCategory = category;
-    }
-  }
-  
-  // Retornar primeiro especialista da categoria
-  return Object.values(specialists)
-    .find(s => s.category === bestCategory && s.visible);
-}
-```
+async function chatWithKiziFlash(specialistId, userMessage) {
+  const specialist = getSpecialist(specialistId);
 
-### Orquestração Multi-Especialista (Estilo Serginho)
-
-```javascript
-import { specialists } from '@rkmmax/specialists';
-
-async function orchestrateSpecialists(userTask) {
-  // 1. Analisar tarefa e selecionar especialistas relevantes
-  const relevantSpecialists = selectRelevantSpecialists(userTask);
-  
-  // 2. Consultar cada especialista
-  const responses = await Promise.all(
-    relevantSpecialists.map(specialist =>
-      callAI(specialist.id, userTask)
-    )
-  );
-  
-  // 3. Sintetizar respostas
-  const synthesis = await synthesizeResponses(responses);
-  
-  return synthesis;
-}
-```
-
-### Cache de Especialistas
-
-```javascript
-import { specialists } from '@rkmmax/specialists';
-
-class SpecialistCache {
-  constructor() {
-    this.cache = new Map();
-  }
-  
-  get(specialistId) {
-    if (!this.cache.has(specialistId)) {
-      this.cache.set(specialistId, specialists[specialistId]);
-    }
-    return this.cache.get(specialistId);
-  }
-  
-  getByCategory(category) {
-    return Object.values(specialists)
-      .filter(s => s.category === category);
-  }
-}
-
-const cache = new SpecialistCache();
-```
-
-## 📊 Estatísticas e Análises
-
-### Contar Especialistas por Categoria
-
-```javascript
-import { specialists } from '@rkmmax/specialists';
-
-function countByCategory() {
-  const counts = {};
-  
-  Object.values(specialists).forEach(specialist => {
-    counts[specialist.category] = (counts[specialist.category] || 0) + 1;
-  });
-  
-  return counts;
-}
-
-console.log(countByCategory());
-// { tech: 7, education: 2, creative: 9, ... }
-```
-
-### Gerar Relatório
-
-```javascript
-function generateReport() {
-  const all = Object.values(specialists);
-  const visible = all.filter(s => s.visible);
-  const categories = [...new Set(all.map(s => s.category))];
-  
-  return {
-    total: all.length,
-    visible: visible.length,
-    hidden: all.length - visible.length,
-    categories: categories.length,
-    byCategory: countByCategory()
-  };
-}
-```
-
-## 🔧 Customização
-
-### Adicionar Metadados Personalizados
-
-```javascript
-import { specialists } from '@rkmmax/specialists';
-
-// Estender com dados locais
-const extendedSpecialists = Object.fromEntries(
-  Object.entries(specialists).map(([id, specialist]) => [
-    id,
+  const response = await fetch(
+    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`,
     {
-      ...specialist,
-      usage: 0,
-      lastUsed: null,
-      favorite: false
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        systemInstruction: {
+          parts: [{ text: specialist.systemPrompt }]
+        },
+        contents: [{
+          role: 'user',
+          parts: [{ text: userMessage }]
+        }],
+        generationConfig: {
+          temperature: 0.7,
+          maxOutputTokens: 4000
+        }
+      })
     }
-  ])
-);
+  );
+
+  const data = await response.json();
+  return data.candidates[0].content.parts[0].text;
+}
 ```
 
-### Tradução
+### Seleção Automática de Motor
 
 ```javascript
-const translations = {
-  'pt-BR': {
-    code: { name: 'Code', description: 'Programação e desenvolvimento' },
-    // ...
-  },
-  'en-US': {
-    code: { name: 'Code', description: 'Programming and development' },
-    // ...
-  }
-};
-
-function getLocalizedSpecialist(id, locale = 'pt-BR') {
-  const specialist = specialists[id];
-  const translation = translations[locale][id];
+function analyzeComplexity(message) {
+  const complexIndicators = [
+    /analis[ae]/i, /compar[ae]/i, /código|code/i, /debug/i,
+    /projeto/i, /estratégia/i, /\?.*\?/
+  ];
   
-  return {
-    ...specialist,
-    ...translation
-  };
+  const simpleIndicators = [
+    /^(oi|olá|hey|hi)/i, /^(obrigado|valeu|thanks)/i,
+    /^.{1,30}$/
+  ];
+  
+  let complexScore = complexIndicators.filter(p => p.test(message)).length;
+  let simpleScore = simpleIndicators.filter(p => p.test(message)).length;
+  
+  if (simpleScore >= 2 && complexScore === 0) return 'flash';
+  if (complexScore >= 2) return 'pro';
+  return 'speed';
+}
+
+async function chatWithKizi(specialistId, message) {
+  const complexity = analyzeComplexity(message);
+  
+  switch (complexity) {
+    case 'pro':
+      return await chatWithKiziPro(specialistId, message);
+    case 'flash':
+      return await chatWithKiziFlash(specialistId, message);
+    default:
+      return await chatWithKiziSpeed(specialistId, message);
+  }
 }
 ```
 
-## 📝 Boas Práticas
+## ⚛️ Integração com React
 
-1. **Sempre verifique se o especialista existe** antes de usar
-2. **Use filtros de visibilidade** para respeitar configurações do usuário
-3. **Cache especialistas** quando possível para melhor performance
-4. **Valide system prompts** antes de enviar para APIs de IA
-5. **Monitore uso** para otimizar custos de API
+### Componente de Card
 
-## 🐛 Troubleshooting
+```jsx
+import { specialists, categories } from './specialists';
 
-### Especialista não encontrado
+function SpecialistCard({ specialistId, onClick }) {
+  const specialist = specialists[specialistId];
+  const category = categories[specialist.category];
+
+  return (
+    <div 
+      className="specialist-card"
+      onClick={() => onClick(specialist)}
+      style={{ borderColor: category.color }}
+    >
+      <div className="specialist-avatar">
+        <span className="emoji">{specialist.emoji}</span>
+      </div>
+      <div className="specialist-info">
+        <h3>{specialist.name}</h3>
+        <p>{specialist.description}</p>
+        <span 
+          className="category-badge"
+          style={{ backgroundColor: category.color }}
+        >
+          {category.emoji} {category.name}
+        </span>
+      </div>
+    </div>
+  );
+}
+```
+
+### Hook de Chat com Especialista
+
+```jsx
+import { useState, useCallback } from 'react';
+import { getSpecialist } from './specialists';
+
+function useSpecialistChat(specialistId) {
+  const [messages, setMessages] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const specialist = getSpecialist(specialistId);
+
+  const sendMessage = useCallback(async (content) => {
+    setLoading(true);
+    
+    const userMessage = { role: 'user', content };
+    setMessages(prev => [...prev, userMessage]);
+
+    try {
+      const response = await fetch('/api/ai', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: 'specialist',
+          specialistId,
+          messages: [...messages, userMessage]
+        })
+      });
+
+      const data = await response.json();
+      
+      setMessages(prev => [...prev, {
+        role: 'assistant',
+        content: data.response,
+        model: data.model  // kizi-2.5-pro, kizi-speed, ou kizi-flash
+      }]);
+    } catch (error) {
+      console.error('Erro:', error);
+    } finally {
+      setLoading(false);
+    }
+  }, [specialistId, messages]);
+
+  return { specialist, messages, loading, sendMessage };
+}
+```
+
+## 🎨 Estilos CSS
+
+```css
+.specialist-card {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 12px;
+  border: 2px solid #e0e0e0;
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.specialist-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.specialist-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.specialist-avatar .emoji {
+  font-size: 2rem;
+}
+
+.category-badge {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  color: white;
+}
+
+/* Badges dos motores KIZI */
+.kizi-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  color: white;
+}
+
+.kizi-badge.pro {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+}
+
+.kizi-badge.speed {
+  background: linear-gradient(135deg, #f59e0b, #ef4444);
+}
+
+.kizi-badge.flash {
+  background: linear-gradient(135deg, #10b981, #06b6d4);
+}
+```
+
+## 🔧 Personalização
+
+### Adicionar especialista customizado
 
 ```javascript
-const specialist = specialists.code;
-if (!specialist) {
-  console.error('Especialista não encontrado!');
-  // Usar especialista padrão ou retornar erro
-}
+import { specialists } from './specialists';
+
+specialists.meuEspecialista = {
+  id: 'meuEspecialista',
+  name: 'Meu Especialista',
+  emoji: '🎯',
+  avatar: '/avatars/custom.png',
+  category: 'tech',
+  description: 'Minha descrição',
+  systemPrompt: `Você é o KIZI 2.5 Pro operando como Meu Especialista...`,
+  visible: true
+};
 ```
 
-### Categoria inválida
+## 🔒 Boas Práticas
 
-```javascript
-const validCategories = [
-  'education', 'tech', 'creative', 'business', 
-  'wellness', 'languages', 'science', 'engineering',
-  'lifestyle', 'entertainment'
-];
-
-function isValidCategory(category) {
-  return validCategories.includes(category);
-}
-```
+1. **Não exponha prompts no frontend** - Os system prompts devem ficar apenas no backend
+2. **Valide specialistId** - Sempre verifique se o especialista existe antes de usar
+3. **Cache de respostas** - Implemente cache para perguntas frequentes
+4. **Rate limiting** - Proteja sua API contra abusos
+5. **Logs** - Registre qual especialista e motor foi usado para analytics
 
 ## 📞 Suporte
 
-Problemas ou dúvidas? Abra uma issue no [GitHub](https://github.com/kizirianmax/rkmmax-specialists/issues).
+- **Issues**: [GitHub Issues](https://github.com/kizirianmax/rkmmax-specialists/issues)
+- **Email**: roberto@kizirianmax.site
+- **Website**: https://kizirianmax.site
 
 ---
 
-**Parte do ecossistema RKMMAX** • [Voltar ao README](./README.md)
+<div align="center">
+
+**Parte do ecossistema KIZI/RKMMAX**
+
+🧠 **KIZI 2.5 Pro** | 🚀 **KIZI Speed** | ⚡ **KIZI Flash**
+
+</div>

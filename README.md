@@ -1,123 +1,129 @@
-# 🤖 RKMMAX Specialists
+# 🤖 RKMMAX Specialists - Biblioteca KIZI
 
-Biblioteca modular com **54 especialistas de IA** para o ecossistema RKMMAX.
+Biblioteca modular com **50+ especialistas de IA** para o ecossistema KIZI/RKMMAX.
+
+Cada especialista é uma instância do **KIZI 2.5 Pro** operando em modo especializado, com prompts otimizados para máxima qualidade e consistência.
+
+## 🚀 Sistema KIZI
+
+Este repositório faz parte do ecossistema KIZI, que utiliza 3 motores de IA:
+
+| Motor | Tecnologia | Uso |
+|-------|------------|-----|
+| 🧠 **KIZI 2.5 Pro** | Gemini 2.5 Pro | Raciocínio complexo, análises profundas |
+| 🚀 **KIZI Speed** | Groq Llama 70B | Velocidade máxima, respostas rápidas |
+| ⚡ **KIZI Flash** | Gemini Flash | Respostas simples, conversas leves |
+
+Os especialistas são projetados para funcionar com qualquer um dos motores, mantendo qualidade consistente.
 
 ## 📋 Sobre
 
-Este repositório contém a configuração de todos os 54 agentes especializados usados na plataforma RKMMAX. Cada especialista tem:
+Este repositório contém a configuração de todos os agentes especializados usados na plataforma RKMMAX. Cada especialista tem:
 
 - **ID único**: Identificador do agente
 - **Nome e emoji**: Identidade visual
 - **Categoria**: Organização por área
 - **Descrição**: Resumo das capacidades
-- **System Prompt**: Instruções específicas para o modelo de IA
+- **System Prompt KIZI**: Instruções otimizadas para o modelo de IA
 - **Visibilidade**: Controle de exibição na interface
 
 ## 🎯 Especialistas por Categoria
 
-### 📚 Educação (2)
-- **Didak**: Especialista em didática e métodos de ensino
-- **Edu**: Tutor acadêmico para todas as matérias
+### 📚 Educação (3)
+- **Didak**: Didática e métodos de ensino
+- **Edu**: Tutor acadêmico multidisciplinar
+- **Mentor**: Orientação de carreira
 
 ### 💻 Tecnologia (7)
 - **Code**: Programação e desenvolvimento
-- **Nexus**: Redes e infraestrutura
-- **Synth**: Inteligência Artificial e Machine Learning
-- **Shield**: Segurança cibernética
+- **Nexus**: Redes, cloud e infraestrutura
+- **Synth**: IA e Machine Learning
+- **Sec**: Segurança cibernética
 - **Data**: Ciência de dados e análise
-- **Cloud**: Cloud computing e DevOps
-- **UX**: Design de experiência do usuário
+- **UX**: UX/UI Design
+- **Mobile**: Desenvolvimento mobile
 
-### 🎨 Criatividade (9)
-- **Arte**: Arte visual e design gráfico
-- **Muse**: Escrita criativa e storytelling
-- **Melody**: Música e composição
-- **Lens**: Fotografia e edição de imagens
-- **Frame**: Cinema e produção audiovisual
-- **Stage**: Teatro e performance
-- **Pixel**: Game design e desenvolvimento de jogos
-- **Brand**: Branding e identidade visual
-- **Motion**: Motion design e animação
+### 🎨 Criatividade (8)
+- **Orac**: Storytelling e narrativa
+- **Art**: Arte visual e design gráfico
+- **Beat**: Música e produção musical
+- **Film**: Cinema e produção audiovisual
+- **Lens**: Fotografia profissional
+- **Write**: Escrita criativa e copywriting
+- **Game**: Game design
+- **Vox**: Comunicação e oratória
+
+### 💙 Bem-estar (7)
+- **Emo**: Inteligência emocional
+- **Focus**: Produtividade e foco
+- **Fit**: Fitness e exercícios
+- **Chef**: Culinária e gastronomia
+- **Nutri**: Nutrição e alimentação
+- **Coach**: Life coaching
+- **Zen**: Meditação e mindfulness
 
 ### 💼 Negócios (7)
-- **Strat**: Estratégia empresarial
-- **Market**: Marketing digital
+- **Biz**: Estratégia empresarial
+- **Cash**: Finanças e investimentos
 - **Sales**: Vendas e negociação
-- **Finance**: Finanças e investimentos
-- **HR**: Recursos humanos
-- **Legal**: Consultoria jurídica
-- **Ops**: Operações e logística
+- **Mark**: Marketing digital
+- **PM**: Product Management
+- **HR**: Recursos Humanos
+- **Law**: Orientação jurídica
 
-### 💙 Bem-estar (5)
-- **Fit**: Fitness e exercícios
-- **Nutri**: Nutrição e alimentação
-- **Mind**: Saúde mental e mindfulness
-- **Coach**: Coaching e desenvolvimento pessoal
-- **Zen**: Produtividade e organização
+### ✨ Lifestyle (6)
+- **Trip**: Viagens e turismo
+- **Home**: Decoração e organização
+- **Style**: Moda e estilo pessoal
+- **Eco**: Sustentabilidade
+- **Pet**: Cuidados com animais
+- **Med**: Informações de saúde
 
 ### 🌍 Idiomas (3)
-- **Poly**: Aprendizado de idiomas
-- **Translate**: Tradução profissional
-- **English**: Professor de inglês
+- **Poly**: Poliglota - múltiplos idiomas
+- **Eng**: Professor de inglês
+- **Span**: Professor de espanhol
 
 ### 🔬 Ciências (5)
 - **Bio**: Biologia e ciências da vida
 - **Chem**: Química
-- **Physics**: Física
+- **Phys**: Física
 - **Math**: Matemática
-- **Geo**: Geografia e geociências
+- **Astro**: Astronomia e astrofísica
 
 ### 🔧 Engenharia (3)
 - **Mech**: Engenharia mecânica
-- **Electro**: Engenharia elétrica
+- **Elec**: Engenharia elétrica
 - **Civil**: Engenharia civil
 
-### ✨ Lifestyle (5)
-- **Travel**: Viagens e turismo
-- **Fashion**: Moda e estilo
-- **Home**: Decoração e design de interiores
-- **Green**: Sustentabilidade e meio ambiente
-- **Pet**: Cuidados com animais de estimação
-
-### 🎮 Extras (8)
-- **Game**: Estratégias e dicas de jogos
-- **Anime**: Cultura anime e mangá
-- **Book**: Recomendações literárias
-- **Food**: Culinária e receitas
-- **Wine**: Enologia e harmonização
-- **Tech News**: Notícias de tecnologia
-- **Crypto**: Criptomoedas e blockchain
-- **Space**: Astronomia e exploração espacial
-
 ## 📦 Instalação
-
-### Como dependência npm (futuro)
-
-```bash
-npm install @rkmmax/specialists
-```
 
 ### Uso direto
 
 ```javascript
-import { specialists } from './specialists.js';
+import { specialists, categories, getSpecialistsByCategory } from './specialists.js';
 
-// Acessar todos os especialistas
-console.log(Object.keys(specialists).length); // 54
+// Total de especialistas
+console.log(Object.keys(specialists).length); // 49
 
 // Acessar especialista específico
 const code = specialists.code;
 console.log(code.name); // "Code"
-console.log(code.description); // "Programação e desenvolvimento"
+console.log(code.description); // "Programação e desenvolvimento de software"
 
 // Filtrar por categoria
-const techSpecialists = Object.values(specialists)
-  .filter(s => s.category === 'tech');
+const techSpecialists = getSpecialistsByCategory('tech');
 console.log(techSpecialists.length); // 7
 
-// Obter apenas especialistas visíveis
-const visibleSpecialists = Object.values(specialists)
-  .filter(s => s.visible);
+// Buscar especialistas
+import { searchSpecialists } from './specialists.js';
+const results = searchSpecialists('marketing');
+
+// Estatísticas
+import { getStats } from './specialists.js';
+const stats = getStats();
+console.log(stats.total); // 49
+console.log(stats.categories); // 9
 ```
 
 ## 🔧 Estrutura de um Especialista
@@ -129,68 +135,110 @@ const visibleSpecialists = Object.values(specialists)
   emoji: '💻',                   // Emoji representativo
   avatar: '/avatars/code.png',   // Caminho do avatar
   category: 'tech',              // Categoria
-  description: 'Programação e desenvolvimento',  // Descrição curta
-  systemPrompt: 'Você é Code...', // Instruções para a IA
+  description: 'Programação e desenvolvimento de software',
+  systemPrompt: '...',           // Prompt KIZI otimizado
   visible: true                  // Visibilidade na interface
 }
 ```
 
+## 🎯 Template de Prompt KIZI
+
+Todos os especialistas usam um template padronizado que garante:
+
+- ✅ Identificação como KIZI 2.5 Pro
+- ✅ Expertise de nível mundial
+- ✅ Metodologia de resposta consistente
+- ✅ Formatação profissional em Markdown
+- ✅ Restrições éticas e de escopo
+- ✅ Avisos legais quando necessário
+
 ## 🎯 Categorias Disponíveis
 
-- `education` - Educação
-- `tech` - Tecnologia
-- `creative` - Criatividade
-- `business` - Negócios
-- `wellness` - Bem-estar
-- `languages` - Idiomas
-- `science` - Ciências
-- `engineering` - Engenharia
-- `lifestyle` - Estilo de vida
-- `entertainment` - Entretenimento
+| ID | Nome | Emoji | Cor |
+|----|------|-------|-----|
+| `education` | Educação | 📚 | #4CAF50 |
+| `tech` | Tecnologia | 💻 | #2196F3 |
+| `creative` | Criatividade | 🎨 | #9C27B0 |
+| `wellness` | Bem-estar | 💙 | #00BCD4 |
+| `business` | Negócios | 💼 | #FF9800 |
+| `lifestyle` | Estilo de Vida | ✨ | #E91E63 |
+| `languages` | Idiomas | 🌍 | #3F51B5 |
+| `science` | Ciências | 🔬 | #009688 |
+| `engineering` | Engenharia | 🔧 | #795548 |
 
 ## 🚀 Integração com RKMMAX
 
-Este repositório é usado pelo [RKMMAX Híbrido](https://github.com/kizirianmax/rkmmax-hibrido) como fonte de especialistas.
+Este repositório é usado pelos projetos:
+- [RKMMAX App](https://github.com/kizirianmax/Rkmmax-app)
+- [RKMMAX Híbrido](https://github.com/kizirianmax/rkmmax-hibrido)
+- [Kizirian Max Site](https://github.com/kizirianmax/kizirian-max-site)
 
-### No app principal:
+### Exemplo de integração:
 
 ```javascript
-import { specialists } from '@rkmmax/specialists';
+import { specialists, getSpecialist } from '@rkmmax/specialists';
 
-// Usar em componentes React
+// Em componentes React
 function SpecialistCard({ specialistId }) {
-  const specialist = specialists[specialistId];
+  const specialist = getSpecialist(specialistId);
   
   return (
-    <div>
-      <span>{specialist.emoji}</span>
+    <div className="card">
+      <span className="emoji">{specialist.emoji}</span>
       <h3>{specialist.name}</h3>
       <p>{specialist.description}</p>
+      <span className="badge">{specialist.category}</span>
     </div>
   );
+}
+
+// Na API
+async function chat(specialistId, messages) {
+  const specialist = getSpecialist(specialistId);
+  
+  return await callKizi({
+    systemPrompt: specialist.systemPrompt,
+    messages,
+    model: 'kizi-2.5-pro'
+  });
 }
 ```
 
 ## 📝 Adicionando Novos Especialistas
 
 1. Edite `specialists.js`
-2. Adicione novo objeto com a estrutura padrão
+2. Use o template `KIZI_SPECIALIST_TEMPLATE`
 3. Escolha categoria apropriada
-4. Crie system prompt específico
-5. Defina `visible: true` quando pronto
+4. Defina expertise e diretrizes específicas
+5. Teste com diferentes perguntas
 
 ```javascript
-newSpecialist: {
-  id: 'newSpecialist',
-  name: 'Nome do Especialista',
+novoEspecialista: {
+  id: 'novoEspecialista',
+  name: 'Nome',
   emoji: '🎯',
-  avatar: '/avatars/newSpecialist.png',
+  avatar: '/avatars/novoEspecialista.png',
   category: 'categoria',
   description: 'Descrição curta',
-  systemPrompt: 'Você é [Nome], especialista em [área]...',
+  systemPrompt: KIZI_SPECIALIST_TEMPLATE(
+    'Nome',
+    'área de expertise',
+    `- Habilidade 1
+- Habilidade 2
+- Habilidade 3`,
+    `- Diretriz 1
+- Diretriz 2`
+  ),
   visible: true,
 }
 ```
+
+## 📊 Estatísticas
+
+- **Total de especialistas**: 49
+- **Categorias**: 9
+- **Idiomas suportados**: Português (primário), Inglês, Espanhol
+- **Motores compatíveis**: KIZI 2.5 Pro, KIZI Speed, KIZI Flash
 
 ## 🔄 Versionamento
 
@@ -199,13 +247,6 @@ Seguimos [Semantic Versioning](https://semver.org/):
 - **MAJOR**: Mudanças incompatíveis na estrutura
 - **MINOR**: Novos especialistas ou funcionalidades
 - **PATCH**: Correções e melhorias em especialistas existentes
-
-## 📊 Estatísticas
-
-- **Total de especialistas**: 54
-- **Categorias**: 10
-- **Idiomas suportados**: Português (primário), Inglês, Espanhol
-- **Modelos de IA compatíveis**: Gemini 2.0, GPT-4, Claude, Llama
 
 ## 🤝 Contribuindo
 
@@ -232,8 +273,10 @@ Proprietary - © 2025 RKMMAX. Todos os direitos reservados.
 
 <div align="center">
 
-**Parte do ecossistema RKMMAX**
+**Parte do ecossistema KIZI/RKMMAX**
 
-[RKMMAX Híbrido](https://github.com/kizirianmax/rkmmax-hibrido) • [Website](https://kizirianmax.site)
+[RKMMAX App](https://github.com/kizirianmax/Rkmmax-app) • [RKMMAX Híbrido](https://github.com/kizirianmax/rkmmax-hibrido) • [Website](https://kizirianmax.site)
+
+🧠 **KIZI 2.5 Pro** | 🚀 **KIZI Speed** | ⚡ **KIZI Flash**
 
 </div>
